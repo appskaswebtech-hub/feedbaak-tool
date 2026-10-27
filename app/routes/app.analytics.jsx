@@ -283,45 +283,14 @@ export default function AnalyticsDashboard() {
           </Card>
         )}
 
-        {/* ── Language Distribution ── */}
-        {surveys.length > 0 && (
-          <Card padding="500">
-            <BlockStack gap="400">
-              <Text variant="headingMd" fontWeight="bold">{t("survey_distribution")}</Text>
-              <Divider />
-              <InlineGrid columns={{ xs: 2, sm: 3, md: 5 }} gap="300">
-                {Object.entries(LANGUAGES).map(([key, { label }]) => {
-                  const survey = surveys.find((s) => getLang(s) === key);
-                  return (
-                    <div key={key} style={{ border: "1px solid #e3e3f1", borderRadius: 12, padding: "14px 12px", textAlign: "center", background: survey ? "#f4f3ff" : "#ffffff" }}>
-                      <BlockStack gap="200" inlineAlign="center">
-                        <Text variant="bodySm" fontWeight="semibold">{label}</Text>
-                        {survey ? (
-                          <>
-                            <Text variant="bodySm" fontWeight="medium">{survey.title}</Text>
-                            <Text variant="bodySm" tone="subdued">{survey.questions?.length || 0} {t("questions_label")}</Text>
-                          </>
-                        ) : (
-                          <Text variant="bodySm" tone="subdued">—</Text>
-                        )}
-                      </BlockStack>
-                    </div>
-                  );
-                })}
-              </InlineGrid>
-            </BlockStack>
-          </Card>
-        )}
-
-        {/* ── Survey List + Languages ── */}
-        <InlineGrid columns={{ xs: 1, md: ["twoThirds", "oneThird"] }} gap="400" alignItems="start">
+        {/* ── Survey List ── */}
         <Card padding="500">
           <BlockStack gap="400">
             <InlineStack align="space-between" blockAlign="center">
               <BlockStack gap="100">
                 <Text variant="headingLg" fontWeight="bold">{t("your_surveys")}</Text>
                 <Text variant="bodySm" tone="subdued">
-                  {t("one_survey_per_lang")} · {PLAN_LABELS[planName]}: {limitLabel} {t("questions_per_survey_label")}
+                  {PLAN_LABELS[planName]}: {limitLabel} {t("questions_per_survey_label")}
                 </Text>
               </BlockStack>
               <Button onClick={() => navigate(withLang("/app/create-survey"))} disabled={hasReachedLimit}>
@@ -354,25 +323,6 @@ export default function AnalyticsDashboard() {
           </BlockStack>
         </Card>
 
-          <Card padding="500">
-            <BlockStack gap="300">
-              <Text variant="headingSm" fontWeight="bold">{t("language_versions")}</Text>
-              <BlockStack gap="200">
-                {Object.entries(LANGUAGES).map(([key, { label }]) => {
-                  const active = usedLanguages.includes(key);
-                  return (
-                    <InlineStack key={key} align="space-between" blockAlign="center">
-                      <Text variant="bodySm" tone={active ? undefined : "subdued"}>{label}</Text>
-                      {active
-                        ? <Text variant="bodySm" tone="success">Added</Text>
-                        : <Button size="micro" disabled={hasReachedLimit} onClick={() => navigate(createPath(key))}>Create</Button>}
-                    </InlineStack>
-                  );
-                })}
-              </BlockStack>
-            </BlockStack>
-          </Card>
-        </InlineGrid>
       </BlockStack>
 
       {/* ── Delete Modal ── */}
