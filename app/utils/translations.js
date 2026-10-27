@@ -5,7 +5,7 @@ const translations = {
     // ── Dashboard ────────────────────────────────────────────
     dashboard_title: "Survey Dashboard",
     dashboard_subtitle: "Overview of your survey performance and insights",
-    guide_title: "Get started in 4 steps",
+    guide_title: "Get started in 3 steps",
     guide_subtitle: "Follow these steps once and your survey will appear on the order thank-you page.",
     guide_step1_title: "Enable the survey block",
     guide_step1_body: "Open Settings > Checkout > Customize > Thank you page. Click Add app block, choose \"order-status-thank-you\" and press Save. The block is hidden until you do this.",

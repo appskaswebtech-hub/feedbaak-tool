@@ -97,7 +97,7 @@ export default function AnalyticsDashboard() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   // ── Read language from URL, default to "default" (English) ──
-  const uiLanguage = searchParams.get("lang") || "default";
+  const uiLanguage = "default";
   const uiLangIso  = LANG_KEY_TO_ISO[uiLanguage] ?? "en";
   const t          = getT(uiLangIso);
 
@@ -127,7 +127,7 @@ export default function AnalyticsDashboard() {
   const dropdownLangFree = !usedLanguages.includes(uiLanguage);
 
   const limitLabel      = questionLimit === null ? "∞" : questionLimit;
-  const hasReachedLimit = surveys.length >= maxSurveys;
+  const hasReachedLimit = usedLanguages.includes("default");
 
   // Delete state
   const [isDeleteBannerVisible, setDeleteBannerVisible] = useState(false);
@@ -199,9 +199,6 @@ export default function AnalyticsDashboard() {
               </span>
             </BlockStack>
             <InlineStack gap="300" blockAlign="center">
-              <div style={{ minWidth: 200 }}>
-                <Select label="" labelHidden options={LANGUAGE_DROPDOWN_OPTIONS} value={uiLanguage} onChange={handleLanguageChange} />
-              </div>
               <Button size="large" onClick={() => navigate(dropdownLangFree ? createPath(uiLanguage) : withLang("/app/create-survey"))} disabled={hasReachedLimit}>
                 {t("create_new_survey")}
               </Button>

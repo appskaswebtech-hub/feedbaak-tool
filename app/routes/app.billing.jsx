@@ -187,7 +187,7 @@ export default function BillingPage() {
   const [searchParams, setSearchParams]     = useSearchParams();
 
   // ── Language from URL ──────────────────────────────────────
-  const uiLanguage = searchParams.get("lang") || "default";
+  const uiLanguage = "default";
   const uiLangIso  = LANG_KEY_TO_ISO[uiLanguage] ?? "en";
   const t          = getT(uiLangIso);
 
@@ -231,14 +231,6 @@ export default function BillingPage() {
 
         {/* Language Dropdown */}
         <InlineStack align="end">
-          <div style={{ minWidth: 200 }}>
-            <Select
-              label=""labelHidden
-              options={LANGUAGES_DROPDOWN}
-              value={uiLanguage}
-              onChange={handleLanguageChange}
-            />
-          </div>
         </InlineStack>
 
         {/* Error Banner */}

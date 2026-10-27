@@ -5,15 +5,9 @@ import { useEffect, useState } from 'preact/hooks';
 // TEMP: local dev tunnel for testing; switch back to https://quiz.kaswebtechsolutions.com before deploy
 const API_BASE_URL = 'https://propecia-century-thee-fraction.trycloudflare.com';
 
-const SUPPORTED_LANGS = ['en', 'fr', 'es', 'it', 'de'];
-
-// Texts shown in the form, per checkout language
+// Texts shown in the form
 const FORM_TEXT = {
   en: { thanksTitle: 'Thanks for your feedback!', thanksText: 'Your response has been submitted', loading: 'Loading...', question: 'Question {n} of {total}', enterSomething: 'Enter something', enterResponse: 'Enter your response', save: 'SAVE', submit: 'SUBMIT' },
-  fr: { thanksTitle: 'Merci pour votre avis !', thanksText: 'Votre réponse a bien été envoyée', loading: 'Chargement...', question: 'Question {n} sur {total}', enterSomething: 'Saisissez votre réponse', enterResponse: 'Saisissez votre réponse', save: 'ENREGISTRER', submit: 'ENVOYER' },
-  es: { thanksTitle: '¡Gracias por sus comentarios!', thanksText: 'Su respuesta ha sido enviada', loading: 'Cargando...', question: 'Pregunta {n} de {total}', enterSomething: 'Escriba su respuesta', enterResponse: 'Escriba su respuesta', save: 'GUARDAR', submit: 'ENVIAR' },
-  it: { thanksTitle: 'Grazie per il tuo feedback!', thanksText: 'La tua risposta è stata inviata', loading: 'Caricamento...', question: 'Domanda {n} di {total}', enterSomething: 'Scrivi la tua risposta', enterResponse: 'Scrivi la tua risposta', save: 'SALVA', submit: 'INVIA' },
-  de: { thanksTitle: 'Danke für Ihr Feedback!', thanksText: 'Ihre Antwort wurde gesendet', loading: 'Wird geladen...', question: 'Frage {n} von {total}', enterSomething: 'Antwort eingeben', enterResponse: 'Antwort eingeben', save: 'SPEICHERN', submit: 'ABSENDEN' },
 };
 
 export default async () => {
@@ -24,8 +18,7 @@ function ProductReview() {
   const orderId = String(shopify.orderConfirmation?.value?.order?.id ?? '').match(/\d+/g)?.pop() ?? '';
   const userEmail = shopify.buyerIdentity?.email?.value;
   const shop = String(shopify.shop?.myshopifyDomain || shopify.shop?.storefrontUrl || '').replace(/^https?:\/\//, '');
-  const rawLang = String(shopify.localization?.language?.value?.isoCode || 'en').slice(0, 2).toLowerCase();
-  const lang = SUPPORTED_LANGS.includes(rawLang) ? rawLang : 'en';
+  const lang = 'en'; // English only
   const txt = FORM_TEXT[lang];
 
   const [surveyTitle, setSurveyTitle] = useState(null);

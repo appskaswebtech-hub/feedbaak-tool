@@ -81,7 +81,7 @@
     const isLoading = navigation.state === "loading" || navigation.state === "submitting";
 
     // ── Language from URL ──────────────────────────────────────
-    const uiLanguage = searchParams.get("lang") || "default";
+    const uiLanguage = "default";
     const uiLangIso  = LANG_KEY_TO_ISO[uiLanguage] ?? "en";
     const t          = getT(uiLangIso);
 
@@ -287,9 +287,6 @@
                 )}
               </InlineStack>
             </Banner>
-            <div style={{ minWidth: 200 }}>
-              <Select label="" labelHidden options={LANGUAGES_DROPDOWN} value={uiLanguage} onChange={handleLanguageChange} />
-            </div>
           </InlineStack>
 
           {/* ── Summary Statistics ── */}

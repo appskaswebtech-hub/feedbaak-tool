@@ -203,7 +203,7 @@ export default function CreateSurvey() {
   const isEditing = !!editSurvey;
 
   // ── Read UI language from URL param ────────────────────────
-  const uiLanguage = searchParams.get("lang") || "default";
+  const uiLanguage = "default";
   const uiLangIso  = LANG_KEY_TO_ISO[uiLanguage] ?? "en";
   const t          = getT(uiLangIso);
 
@@ -229,11 +229,7 @@ export default function CreateSurvey() {
   // ── Survey language (for the survey content itself) ────────
   const requestedSurveyLang = searchParams.get("surveyLang");
   const initialSurveyLang = isEditing ? getLang(editSurvey) : (() => {
-    if (requestedSurveyLang && LANGUAGES[requestedSurveyLang] && !usedLanguages.includes(requestedSurveyLang)) {
-      return requestedSurveyLang;
-    }
-    const firstFree = Object.keys(LANGUAGES).find((k) => !usedLanguages.includes(k));
-    return firstFree ?? "default";
+    return "default";
   })();
 
   const [surveyLanguage, setSurveyLanguage] = useState(initialSurveyLang);
@@ -363,9 +359,6 @@ export default function CreateSurvey() {
             {isEditing ? t("edit_survey_subtitle") : t("create_survey_subtitle")}
           </Text>
           <InlineStack gap="300" blockAlign="center">
-            <div style={{ minWidth: 200 }}>
-              <Select label="" labelHidden options={LANGUAGE_DROPDOWN_OPTIONS} value={uiLanguage} onChange={handleUiLanguageChange} />
-            </div>
           </InlineStack>
         </InlineStack>
 
@@ -445,7 +438,8 @@ export default function CreateSurvey() {
                     disabled={isSubmitting}
                   />
 
-                  {/* ── Survey Language Selector ── */}
+                  {/* ── Survey Language Selector (only when editing an older non-English survey) ── */}
+                  {isEditing && surveyLanguage !== "default" && (
                   <Card padding="400">
                     <BlockStack gap="300">
                       <Text variant="headingSm" fontWeight="semibold">{t("survey_language")}</Text>
@@ -476,6 +470,7 @@ export default function CreateSurvey() {
                       </InlineStack>
                     </BlockStack>
                   </Card>
+                  )}
 
                   {!isEditing && (
                     <Text variant="bodySm" tone="subdued">

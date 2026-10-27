@@ -115,7 +115,7 @@ const TestCharts = () => {
     const navigate = useNavigate();
 
     // ── Language from URL ──────────────────────────────────────
-    const uiLanguage = searchParams.get("lang") || "default";
+    const uiLanguage = "default";
     const uiLangIso  = LANG_KEY_TO_ISO[uiLanguage] ?? "en";
     const t          = getT(uiLangIso);
 
@@ -299,15 +299,6 @@ const TestCharts = () => {
                             )}
                         </InlineStack>
                     </Banner>
-                    <div style={{ minWidth: 200 }}>
-                        <Select
-                            label=""
-                            labelHidden
-                            options={LANGUAGES_DROPDOWN}
-                            value={uiLanguage}
-                            onChange={handleLanguageChange}
-                        />
-                    </div>
                 </InlineStack>
 
                 {/* Stats & Controls Card */}

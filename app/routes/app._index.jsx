@@ -104,7 +104,7 @@ export default function DashboardIndex() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   // ── Read language from URL, default to "default" (English) ──
-  const uiLanguage = searchParams.get("lang") || "default";
+  const uiLanguage = "default";
   const uiLangIso  = LANG_KEY_TO_ISO[uiLanguage] ?? "en";
   const t          = getT(uiLangIso);
 
@@ -134,7 +134,7 @@ export default function DashboardIndex() {
   const dropdownLangFree = !usedLanguages.includes(uiLanguage);
 
   const limitLabel      = questionLimit === null ? "∞" : questionLimit;
-  const hasReachedLimit = surveys.length >= maxSurveys;
+  const hasReachedLimit = usedLanguages.includes("default");
 
   // Delete state
   const [isDeleteBannerVisible, setDeleteBannerVisible] = useState(false);
@@ -213,9 +213,6 @@ export default function DashboardIndex() {
     { n: 2, title: t("guide_step2_title"), done: surveys.length > 0,
       body: t("guide_step2_body"),
       action: { content: t("guide_step2_btn"), onAction: () => navigate(dropdownLangFree ? createPath(uiLanguage) : withLang("/app/create-survey")), disabled: hasReachedLimit } },
-    { n: 3, title: t("guide_step3_title"), done: usedLanguages.length > 1 || !!manualDone[3], manual: usedLanguages.length <= 1,
-      body: t("guide_step3_body"),
-      action: null },
     { n: 4, title: t("guide_step4_title"), done: hasResponses || !!manualDone[4], manual: !hasResponses,
       body: t("guide_step4_body"),
       action: { content: t("guide_step4_btn"), onAction: () => navigate(withLang("/app/manage")) } },
@@ -235,9 +232,6 @@ export default function DashboardIndex() {
             </Text>
           </BlockStack>
           <InlineStack gap="300" blockAlign="center">
-            <div style={{ minWidth: 200 }}>
-              <Select label="" labelHidden options={LANGUAGE_DROPDOWN_OPTIONS} value={uiLanguage} onChange={handleLanguageChange} />
-            </div>
             <Button variant="primary" size="large" onClick={() => navigate(dropdownLangFree ? createPath(uiLanguage) : withLang("/app/create-survey"))} disabled={hasReachedLimit}>
               {t("create_new_survey")}
             </Button>
@@ -269,7 +263,7 @@ export default function DashboardIndex() {
                   <div key={n} style={{ display: "flex", gap: 16 }}>
                     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: 32 }}>
                       <div style={{ width: 32, height: 32, borderRadius: 16, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14, fontWeight: 700,
-                        background: filled ? "#4f46e5" : "#ffffff", color: filled ? "#ffffff" : "#8a8aa8", border: filled ? "2px solid #4f46e5" : "2px solid #d6d6e7" }}>{n}</div>
+                        background: filled ? "#4f46e5" : "#ffffff", color: filled ? "#ffffff" : "#8a8aa8", border: filled ? "2px solid #4f46e5" : "2px solid #d6d6e7" }}>{i + 1}</div>
                       {!isLast && <div style={{ flex: 1, width: 2, background: "#d6d6e7", margin: "4px 0" }} />}
                     </div>
                     <div style={{ paddingBottom: isLast ? 0 : 24, flex: 1, maxWidth: 720 }}>
