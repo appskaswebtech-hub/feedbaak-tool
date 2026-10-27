@@ -7,6 +7,38 @@ import { authenticate } from "../shopify.server";
 
 export const links = () => [{ rel: "stylesheet", href: polarisStyles }];
 
+const lightTheme = `
+  :root {
+    --ft-primary: #4f46e5;
+    --ft-primary-dark: #4338ca;
+    --ft-primary-soft: #e0e0fb;
+    --ft-bg: #f1f0fe;
+    --ft-text: #1b1b3a;
+    --ft-muted: #5f6080;
+    --ft-border: #e3e3f1;
+    --p-color-bg: var(--ft-bg);
+    --p-color-bg-surface: #ffffff;
+    --p-color-bg-fill-brand: var(--ft-primary);
+    --p-color-bg-fill-brand-hover: var(--ft-primary-dark);
+    --p-color-bg-fill-brand-active: var(--ft-primary-dark);
+    --p-color-text: var(--ft-text);
+    --p-color-text-secondary: var(--ft-muted);
+    --p-color-border: var(--ft-border);
+  }
+  html, body { background: var(--ft-bg) !important; color: var(--ft-text); }
+  .app-shell { background: var(--ft-bg); min-height: 100vh; padding-bottom: 48px; }
+
+  .app-shell .Polaris-Page { max-width: 1200px; padding-top: 24px; }
+  .Polaris-Card, .Polaris-LegacyCard { background: #ffffff; border: 1px solid var(--ft-border);
+    border-radius: 16px; box-shadow: 0 1px 3px rgba(79,70,229,.06); }
+  .Polaris-Button--variantPrimary { background: var(--ft-primary); border-radius: 10px; }
+  .Polaris-Button--variantPrimary:hover { background: var(--ft-primary-dark); }
+  .Polaris-Button { border-radius: 10px; }
+  .Polaris-Badge { border-radius: 999px; }
+  .Polaris-DataTable__Cell, .Polaris-DataTable__Cell--header { border-color: var(--ft-border); }
+
+`;
+
 export const loader = async ({ request }) => {
   await authenticate.admin(request);
 
@@ -18,14 +50,19 @@ export default function App() {
 
   return (
       <AppProvider isEmbeddedApp apiKey={apiKey}>
+        <style>{lightTheme}</style>
         <NavMenu>
           <Link to="/app" rel="home">
             Home
           </Link>
+          <Link to="/app/analytics">Analytics</Link>
           <Link to="/app/manage">Manage Feedbacks</Link>
           <Link to="/app/visualize">Visualization</Link>
+          <Link to="/app/billing">Upgrade your plan</Link>
         </NavMenu>
-        <Outlet />
+        <div className="app-shell">
+          <Outlet />
+        </div>
       </AppProvider>
   );
 }

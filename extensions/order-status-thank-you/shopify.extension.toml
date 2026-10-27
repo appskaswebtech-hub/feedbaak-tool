@@ -1,11 +1,8 @@
-api_version = "2024-07"
-
-[capabilities]
-api_access = true
-network_access = true
+api_version = "2026-01"
 
 
 [[extensions]]
+uid = "6a21e0ac-4169-cd3e-0477-b56ec8f7f8ec1b33dd9b"
 type = "ui_extension"
 name = "order-status-thank-you"
 handle = "order-status-thank-you"
@@ -16,13 +13,12 @@ handle = "order-status-thank-you"
     type = "single_line_text_field"
     name = "Survey title"
     description = "Enter a title for the survey."
-    
-[extensions.capabilities]
-api_access = true
-network_access = true
+
+    [extensions.capabilities]
+     api_access = true
+     network_access = true
 
 [[extensions.targeting]]
 target = "purchase.thank-you.block.render"
 module = "./src/Checkout.jsx"
-export = "orderDetailsBlock"
 
