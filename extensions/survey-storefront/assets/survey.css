@@ -1,0 +1,77 @@
+/* Storefront survey widget. Colors, radius and font come from per-survey CSS variables set in survey.js */
+
+.ft-survey-root { display: block; }
+
+.ft-survey {
+  --ft-accent: #4f46e5;
+  --ft-bg: #ffffff;
+  --ft-text: #1b1b3a;
+  --ft-radius: 12px;
+  --ft-font: inherit;
+  box-sizing: border-box;
+  font-family: var(--ft-font);
+  color: var(--ft-text);
+  background: var(--ft-bg);
+  border-radius: var(--ft-radius);
+  line-height: 1.45;
+  font-size: 15px;
+}
+.ft-survey *, .ft-survey *::before, .ft-survey *::after { box-sizing: border-box; font-family: inherit; }
+
+/* Layouts */
+.ft-survey--card { border: 1px solid rgba(0, 0, 0, 0.12); box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12); padding: 20px; }
+.ft-survey--flat { border: 0; box-shadow: none; padding: 8px 0; background: transparent; }
+
+/* Inline */
+.ft-inline .ft-survey { width: 100%; max-width: 640px; margin: 24px auto; }
+
+/* Pop-up */
+.ft-popup-wrap { position: fixed; z-index: 2147483000; display: none; }
+.ft-popup-wrap.ft-open { display: block; }
+.ft-popup-wrap .ft-survey { width: min(380px, calc(100vw - 24px)); max-height: calc(100vh - 24px); overflow-y: auto; }
+.ft-pos-bottom-right { right: 12px; bottom: 12px; }
+.ft-pos-bottom-left { left: 12px; bottom: 12px; }
+.ft-pos-center { inset: 0; display: none; align-items: center; justify-content: center; background: rgba(0, 0, 0, 0.5); }
+.ft-pos-center.ft-open { display: flex; }
+.ft-pos-center .ft-survey { width: min(460px, calc(100vw - 24px)); }
+.ft-popup-wrap.ft-open .ft-survey { animation: ft-in 0.25s ease-out; }
+@keyframes ft-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Content */
+.ft-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 4px; }
+.ft-step { font-size: 12px; opacity: 0.65; margin: 0 0 6px; }
+.ft-question { font-size: 17px; font-weight: 600; margin: 0 0 14px; }
+.ft-close { background: none; border: 0; color: inherit; opacity: 0.6; cursor: pointer; font-size: 13px; padding: 2px 4px; }
+.ft-close:hover { opacity: 1; text-decoration: underline; }
+.ft-progress { height: 4px; border-radius: 2px; background: rgba(0, 0, 0, 0.08); overflow: hidden; margin-bottom: 14px; }
+.ft-progress > span { display: block; height: 100%; background: var(--ft-accent); transition: width 0.3s ease; }
+
+.ft-options { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+.ft-option {
+  text-align: left; width: 100%; padding: 10px 12px; cursor: pointer; font-size: 15px;
+  color: var(--ft-text); background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.2); border-radius: calc(var(--ft-radius) - 4px);
+  transition: border-color 0.15s, background 0.15s;
+}
+.ft-option:hover { border-color: var(--ft-accent); }
+.ft-option.ft-selected { border-color: var(--ft-accent); background: var(--ft-accent); color: #ffffff; }
+
+.ft-scale { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 6px; }
+.ft-scale .ft-option { width: auto; min-width: 40px; text-align: center; padding: 9px 10px; }
+.ft-scale-labels { display: flex; justify-content: space-between; font-size: 12px; opacity: 0.65; margin-bottom: 14px; }
+
+.ft-input, .ft-textarea {
+  width: 100%; padding: 10px 12px; font-size: 15px; color: var(--ft-text); background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.25); border-radius: calc(var(--ft-radius) - 4px); margin-bottom: 14px;
+}
+.ft-textarea { min-height: 84px; resize: vertical; }
+.ft-input:focus, .ft-textarea:focus { outline: 2px solid var(--ft-accent); outline-offset: 0; }
+
+.ft-btn {
+  display: inline-block; cursor: pointer; font-size: 15px; font-weight: 600; padding: 10px 18px;
+  color: #ffffff; background: var(--ft-accent); border: 0; border-radius: calc(var(--ft-radius) - 4px);
+}
+.ft-btn[disabled] { opacity: 0.5; cursor: not-allowed; }
+.ft-thanks { text-align: center; padding: 12px 0; }
+.ft-thanks strong { display: block; font-size: 18px; margin-bottom: 4px; }
+.ft-hint { font-size: 13px; opacity: 0.7; border: 1px dashed rgba(0, 0, 0, 0.3); padding: 10px 12px; border-radius: 8px; }

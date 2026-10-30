@@ -1,0 +1,29 @@
+{{ 'survey.css' | asset_url | stylesheet_tag }}
+
+<div
+  class="ft-survey-root"
+  data-mode="inline"
+  data-proxy="/apps/surveyquery"
+  data-page-type="{{ request.page_type }}"
+  data-product-id="{{ product.id }}"
+  data-collection-id="{{ collection.id }}"
+  data-country="{{ localization.country.iso_code }}"
+  data-cart-total="{{ cart.total_price | divided_by: 100.0 }}"
+  data-customer-email="{{ customer.email | escape }}"
+  data-design-mode="{{ request.design_mode }}"
+></div>
+
+<script src="{{ 'survey.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Feedback survey",
+  "target": "section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Shows the active storefront survey that matches this page. Create and style surveys in the app: choose Storefront pages under Where to show."
+    }
+  ]
+}
+{% endschema %}

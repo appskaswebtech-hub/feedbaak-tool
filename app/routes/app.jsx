@@ -25,12 +25,21 @@ const lightTheme = `
     --p-color-text-secondary: var(--ft-muted);
     --p-color-border: var(--ft-border);
   }
-  html, body { background: var(--ft-bg) !important; color: var(--ft-text); }
-  .app-shell { background: var(--ft-bg); min-height: 100vh; padding-bottom: 48px; }
+  html, body { background: #e5eeff !important; color: var(--ft-text); }
+  .app-shell {
+    min-height: 100vh; padding-bottom: 48px;
+    // background:
+    //   radial-gradient(900px 480px at 8% -5%, rgba(124,58,237,.20), transparent 60%),
+    //   radial-gradient(800px 460px at 95% 0%, rgba(79,70,229,.22), transparent 60%),
+    //   radial-gradient(700px 420px at 50% 105%, rgba(167,139,250,.22), transparent 60%),
+    //   linear-gradient(180deg, #f6f4ff 0%, #e9e6fc 100%);
+    background-attachment: fixed;
+    background: linear-gradient(110deg, #ffffff 0%, #f4fbff 42%, #e5f5ff 100%)
+  }
 
   .app-shell .Polaris-Page { max-width: 1200px; padding-top: 24px; }
   .Polaris-Card, .Polaris-LegacyCard { background: #ffffff; border: 1px solid var(--ft-border);
-    border-radius: 16px; box-shadow: 0 1px 3px rgba(79,70,229,.06); }
+    border-radius: 16px; box-shadow: 0 4px 24px rgba(79,70,229,.10), 0 1px 3px rgba(79,70,229,.08); }
   .Polaris-Button--variantPrimary { background: var(--ft-primary); border-radius: 10px; }
   .Polaris-Button--variantPrimary:hover { background: var(--ft-primary-dark); }
   .Polaris-Button { border-radius: 10px; }

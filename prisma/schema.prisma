@@ -36,6 +36,19 @@ model Survey {
 
   surveyId         Int?
   questions        Question[]
+
+  // Visibility + targeting
+  isActive         Boolean    @default(true)
+  startsAt         DateTime?
+  endsAt           DateTime?
+  targetType       String     @default("all")   // all | product | collection | country | min_total
+  targetValue      String?    @db.Text          // JSON, depends on targetType
+
+  // Where the survey appears + how it looks
+  placement        String     @default("thankyou") // thankyou | storefront | both
+  pageTargets      String?    @db.Text          // JSON array: home, product, collection, cart, page, all
+  design           String?    @db.Text          // JSON: colors, radius, layout, position, trigger, frequency
+
   createdAt        DateTime   @default(now())
   updatedAt        DateTime   @updatedAt
 
@@ -55,6 +68,8 @@ model Question {
   isTextBox       Boolean   @default(false)
   isSingle        Boolean   @default(false)
   conditionAnswer String?
+  questionType    String?   // null (choice/text) | rating | nps
+  branchRules     String?   @db.Text // JSON: [{ op, value, goTo }] goTo = question number or "end"
 
   @@index([surveyId])
 }
@@ -77,6 +92,8 @@ model ApiProxyData {
   surveyTitle String?
   shopDomain  String?  // Customer's shop domain (if different)
   orderId     String?
+  source      String?  // null / "thankyou" or "storefront"
+  pageUrl     String?
   createdAt   DateTime @default(now())
 
   @@index([shop])

@@ -1,0 +1,29 @@
+{{ 'survey.css' | asset_url | stylesheet_tag }}
+
+<div
+  class="ft-survey-root"
+  data-mode="popup"
+  data-proxy="/apps/surveyquery"
+  data-page-type="{{ request.page_type }}"
+  data-product-id="{{ product.id }}"
+  data-collection-id="{{ collection.id }}"
+  data-country="{{ localization.country.iso_code }}"
+  data-cart-total="{{ cart.total_price | divided_by: 100.0 }}"
+  data-customer-email="{{ customer.email | escape }}"
+  data-design-mode="{{ request.design_mode }}"
+></div>
+
+<script src="{{ 'survey.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Feedback survey pop-up",
+  "target": "body",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Shows the matching storefront survey as a pop-up. Position, colors and when it appears (after a delay, on scroll or on exit intent) are set per survey in the app."
+    }
+  ]
+}
+{% endschema %}

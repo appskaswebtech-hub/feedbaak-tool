@@ -9,10 +9,10 @@ handle = "order-status-thank-you"
 
   [extensions.settings]
     [[extensions.settings.fields]]
-    key = "survey_title"
+    key = "app_url"
     type = "single_line_text_field"
-    name = "Survey title"
-    description = "Enter a title for the survey."
+    name = "App URL (testing only)"
+    description = "Leave empty on a live store. For local testing, paste your dev tunnel URL, for example https://example.trycloudflare.com"
 
     [extensions.capabilities]
      api_access = true

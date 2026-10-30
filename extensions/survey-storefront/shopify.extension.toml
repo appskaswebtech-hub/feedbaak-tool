@@ -1,0 +1,5 @@
+[[extensions]]
+type = "theme"
+name = "survey-storefront"
+handle = "survey-storefront"
+uid = "f00fd688-3120-e000-265e-b1b8275697ee5726daae"
